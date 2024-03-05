@@ -14,6 +14,11 @@ const commentData = [
   //
 ];
 
+module.exports = {
+  exProgramData,
+  userData,
+  commentData,
+};
 // Create an async function that will seed the database after the database connects
 async function seedData() {
   await db.ExerciseProgram.deleteMany({});
