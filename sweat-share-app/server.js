@@ -13,7 +13,9 @@ const port = process.env.PORT || 3000;
 
 //our own modules
 const db = require("./models");
+const commentsRouter = require("./routers/commentsRouter");
 const exerciseProgRouters = require("./routers/exerciseProgramRouter");
+const sessionsRouter = require("./routers/sessionsRouter");
 const userRouters = require("./routers/userRouter");
 
 //configs
@@ -26,7 +28,6 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use(morgan("tiny")); // morgan is just a logger
 app.use(
   session({
     secret: process.env.SECRET_KEY, //used to scramble the cookie!
@@ -37,10 +38,22 @@ app.use(
 
 //MAIN ROUTES:
 //landing page
+app.get("/", (req, res) => {
+  res.send("landing page");
+});
 
-//different routes
+//about page
+
+//CRUD routes
+app.use("/comments", commentsRouter);
+app.use("/exercisePrograms", exerciseProgRouters);
+app.use("/sessions", sessionsRouter);
+app.use("/users", userRouters);
 
 //error routes
+app.use((req, res, next) => {
+  res.send("404");
+});
 
 //SERVER LISTENING
 app.listen(port, () => {
