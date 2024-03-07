@@ -21,8 +21,8 @@ const createUser = async (req, res) => {
     );
     const newUser = await User.create(req.body);
     req.session.currentUser = newUser;
-    console.log(newUser);
-    console.log(req.session.currentUser);
+    console.log("newly created user", newUser);
+    console.log("session user:", req.session.currentUser);
     res.redirect(`/users/${newUser._id}`);
   } catch (err) {
     res.render("error.ejs", { error: err.message });

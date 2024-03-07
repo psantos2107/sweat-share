@@ -11,7 +11,13 @@ const userSchema = Schema({
     minLength: [1, "Your username must contain at least one character."],
   },
   password: { type: String, required: true, trim: true },
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    minLength: [1, "Your name must contain at least one character."],
+  },
+  lastName: {
     type: String,
     required: true,
     trim: true,
