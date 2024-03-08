@@ -39,7 +39,7 @@ app.use(
 //MAIN ROUTES:
 //landing page
 app.get("/", (req, res) => {
-  res.send("landing page");
+  res.sendFile(path.join(__dirname, "public", "staticHTML", "landing.html"));
 });
 
 //about page

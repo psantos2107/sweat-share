@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("./../models/user");
 
 const newSession = (req, res) => {
-  res.render("sessions/new.ejs");
+  res.render("sessionViews/new.ejs");
 };
 
 const createSession = async (req, res) => {

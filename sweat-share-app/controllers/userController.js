@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("./../models/user");
 
 const newUser = (req, res) => {
-  res.render("/userViews/new.ejs");
+  res.render("userViews/new.ejs");
 };
 
 const deleteUser = (req, res) => {
