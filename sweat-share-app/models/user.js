@@ -25,7 +25,10 @@ const userSchema = Schema(
       required: [true, "You must input a last name!"],
       trim: true,
     },
-    age: { type: Number, required: [true, "you must input an age!"] },
+    age: {
+      type: Number,
+      required: [true, "you must input an age!"],
+    },
     location: { type: String },
     profilePic: {
       type: String,

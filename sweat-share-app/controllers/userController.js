@@ -17,6 +17,7 @@ const updateUser = (req, res) => {
 const createUser = async (req, res) => {
   try {
     if (req.body.password.length < 6) {
+      //custom error handling for password length
       throw new Error("Password must be at least 6 characters long.");
     } else {
       req.body.password = await bcrypt.hash(
@@ -29,8 +30,21 @@ const createUser = async (req, res) => {
       console.log("session user:", req.session.currentUser);
       res.redirect(`/users/${newUser._id}`);
     }
-  } catch (err) {
-    req.flash("signUpError", err.message);
+  } catch (error) {
+    let errMessage = "";
+    //catches all validation errors and logs them
+    if (error.name === "ValidationError") {
+      errMessage = Object.values(error.errors)
+        .map((err) => err.message)
+        .join(" ");
+      //catches CastErrors
+      if (error.errors?.age.name === "CastError") {
+        errMessage = "You must input a proper number for your age";
+      }
+    } else {
+      errMessage = error.message;
+    }
+    req.flash("signUpError", errMessage);
     res.redirect("/users/new");
   }
 };
