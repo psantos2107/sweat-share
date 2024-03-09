@@ -86,7 +86,7 @@ const userData = [
   },
   {
     username: "ryan_robinson",
-    password: "ryanr",
+    password: "ryanr22",
     firstName: "Ryan",
     lastName: "Robinson",
     age: 32,
@@ -1308,10 +1308,10 @@ const exerciseProgramData2 = [
   },
 ];
 
-// Create an async function that will seed the database after the database connects
+//seeds the database with USERS
 async function seedUserData() {
   await db.User.deleteMany({});
-  console.log("Removed all log entries");
+  console.log("Removed all user entries");
   await db.User.insertMany(userData);
   console.log(`Added ${userData.length} users to the database`);
   // await db.Comment.deleteMany({});
@@ -1323,13 +1323,13 @@ async function seedUserData() {
 async function seedExProgramData() {
   const users = await db.User.find({});
   users.forEach((user, i) => {
-    console.log(exerciseProgramData1, exerciseProgramData2);
-    exerciseProgramData1[i].createdBy = user._id;
-    exerciseProgramData2[i].createdBy = user._id;
+    //allows for users to own TWO EXERCISE PROGRAMS EACH
+    exerciseProgramData1[i].createdBy = user._id; //contains 15 ex. Programs
+    exerciseProgramData2[i].createdBy = user._id; //contains 15 ex. programs
   });
   await db.ExerciseProgram.deleteMany({});
   await db.Comment.deleteMany({});
-  console.log("Removed all log entries");
+  console.log("Removed all exercise programs and associated comments");
   await db.ExerciseProgram.insertMany(exerciseProgramData1);
   await db.ExerciseProgram.insertMany(exerciseProgramData2);
   console.log(

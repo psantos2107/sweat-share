@@ -21,7 +21,7 @@ const exerciseSchema = new Schema(
     imagePath: {
       type: String,
       trim: true,
-      default: path.join(__dirname, "..", "..", "public", "imgs", "logo.jpg"),
+      default: path.join(__dirname, "..", "public", "imgs", "logo.jpg"),
     },
     equipmentNeeded: { type: String, trim: true, default: "Not specified" },
     muscleWorked: { type: String, default: "Not specified" },

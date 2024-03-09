@@ -6,31 +6,31 @@ const userSchema = Schema(
   {
     username: {
       type: String,
-      unique: true,
-      required: true,
+      unique: [true, "Username already taken!"],
+      required: [true, "You must input a username!"],
       trim: true,
-      minLength: [1, "Your username must contain at least one character."],
     },
-    password: { type: String, required: true, trim: true },
+    password: {
+      type: String,
+      required: [true, "You must input a password!"],
+      trim: true,
+    },
     firstName: {
       type: String,
-      required: true,
+      required: [true, "You must input some sort of first name!"],
       trim: true,
-      minLength: [1, "Your name must contain at least one character."],
     },
     lastName: {
       type: String,
-      required: true,
+      required: [true, "You must input a last name!"],
       trim: true,
-      minLength: [1, "Your name must contain at least one character."],
     },
-    age: { type: Number },
+    age: { type: Number, required: [true, "you must input an age!"] },
     location: { type: String },
     profilePic: {
       type: String,
       default: path.join(
         __dirname,
-        "..",
         "..",
         "public",
         "imgs",

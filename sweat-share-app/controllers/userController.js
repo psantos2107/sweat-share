@@ -2,7 +2,8 @@ const bcrypt = require("bcrypt");
 const User = require("./../models/user");
 
 const newUser = (req, res) => {
-  res.render("userViews/new.ejs");
+  const errorMessage = req.flash("signUpError");
+  res.render("userViews/new.ejs", { errorMessage });
 };
 
 const deleteUser = (req, res) => {
@@ -15,17 +16,22 @@ const updateUser = (req, res) => {
 
 const createUser = async (req, res) => {
   try {
-    req.body.password = await bcrypt.hash(
-      req.body.password,
-      await bcrypt.genSalt(10)
-    );
-    const newUser = await User.create(req.body);
-    req.session.currentUser = newUser;
-    console.log("newly created user", newUser);
-    console.log("session user:", req.session.currentUser);
-    res.redirect(`/users/${newUser._id}`);
+    if (req.body.password.length < 6) {
+      throw new Error("Password must be at least 6 characters long.");
+    } else {
+      req.body.password = await bcrypt.hash(
+        req.body.password,
+        await bcrypt.genSalt(10)
+      );
+      const newUser = await User.create(req.body);
+      req.session.currentUser = newUser;
+      console.log("newly created user", newUser);
+      console.log("session user:", req.session.currentUser);
+      res.redirect(`/users/${newUser._id}`);
+    }
   } catch (err) {
-    res.render("error.ejs", { error: err.message });
+    req.flash("signUpError", err.message);
+    res.redirect("/users/new");
   }
 };
 

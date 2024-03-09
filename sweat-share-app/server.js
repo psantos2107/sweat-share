@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const session = require("express-session");
 const methodOverride = require("method-override");
+const flash = require("connect-flash");
 
 //connect to the proper port
 const port = process.env.PORT || 3000;
@@ -35,6 +36,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(flash()); //for error pop-ups
 
 //MAIN ROUTES:
 //landing page

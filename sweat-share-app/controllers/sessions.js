@@ -2,7 +2,8 @@ const bcrypt = require("bcrypt");
 const User = require("./../models/user");
 
 const newSession = (req, res) => {
-  res.render("sessionViews/new.ejs");
+  const errorMessage = req.flash("loginError");
+  res.render("sessionViews/new.ejs", { errorMessage });
 };
 
 const createSession = async (req, res) => {
@@ -11,7 +12,8 @@ const createSession = async (req, res) => {
     const foundUser = await User.findOne({ username: req.body.username });
     if (!foundUser) {
       // if found user is undefined/null not found etc
-      res.send('<a  href="/">Sorry, no user found </a>');
+      req.flash("loginError", "Username or password is incorrect");
+      res.redirect("/sessions/new");
     } else if (await bcrypt.compare(req.body.password, foundUser.password)) {
       // add the user to our session
       req.session.currentUser = foundUser;
@@ -19,12 +21,11 @@ const createSession = async (req, res) => {
       console.log("user logged in!");
       res.redirect("/exercisePrograms");
     } else {
-      res.send('<a href="/"> password does not match </a>');
+      req.flash("loginError", "Username or password is incorrect");
+      res.redirect("/sessions/new");
     }
   } catch (err) {
-    res.render("error.ejs", {
-      error: "Something went wrong with the database... Please retry again!",
-    });
+    console.log(err);
   }
 };
 
