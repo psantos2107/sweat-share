@@ -32,7 +32,7 @@ const createSession = async (req, res) => {
 const destroySession = (req, res) => {
   req.session.destroy(() => {
     console.log("session ended");
-    res.redirect("/exercisePrograms");
+    res.redirect("/");
   });
 };
 

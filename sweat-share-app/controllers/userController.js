@@ -1,13 +1,25 @@
 const bcrypt = require("bcrypt");
 const User = require("./../models/user");
+const ExerciseProgram = require("./../models/exerciseProgram");
 
 const newUser = (req, res) => {
+  //if the user was redirected to this route due to an error, that error will be stored in errorMessage and subsequently rendered onto the screen
   const errorMessage = req.flash("signUpError");
   res.render("userViews/new.ejs", { errorMessage });
 };
 
-const deleteUser = (req, res) => {
-  res.send("user delete");
+const deleteUser = async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    await ExerciseProgram.deleteMany({ _id: req.params.id });
+    req.flash(
+      "userDeleted",
+      `Your account is closed. We're sorry to see you go.`
+    );
+    res.redirect("/exercisePrograms");
+  } catch (err) {
+    console.log("There was an error with deleting the user: " + err.message);
+  }
 };
 
 const updateUser = (req, res) => {
@@ -26,9 +38,8 @@ const createUser = async (req, res) => {
       );
       const newUser = await User.create(req.body);
       req.session.currentUser = newUser;
-      console.log("newly created user", newUser);
-      console.log("session user:", req.session.currentUser);
-      res.redirect(`/users/${newUser._id}`);
+      req.flash("newUserCreated", `Welcome ${newUser.username} to SweatShare!`);
+      res.redirect(`/exercisePrograms`);
     }
   } catch (error) {
     let errMessage = "";

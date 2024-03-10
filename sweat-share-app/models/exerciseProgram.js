@@ -10,6 +10,10 @@ const exProgramSchema = new Schema(
       ref: "User",
       required: true,
     },
+    user: {
+      type: String,
+      required: true,
+    },
     description: { type: String, required: true },
     programType: {
       type: String,

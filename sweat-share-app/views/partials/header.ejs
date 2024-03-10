@@ -13,7 +13,26 @@
     <% }%> <%if(signup){ %>
     <li><a class="nav-link" href="/users/new">SIGNUP</a></li>
     <%} %> <%if(myProfile){ %>
-    <li><a class="nav-link" href="/users/<%=myProfile._id%>">MY PROFILE</a></li>
+    <li>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          MY PROFILE
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="/users/<%=`${id}`%>">VIEW PROFILE</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="/" onclick="logOut()">SIGN OUT</a>
+          </li>
+        </ul>
+      </div>
+    </li>
     <%} %>
   </ul>
 </nav>
