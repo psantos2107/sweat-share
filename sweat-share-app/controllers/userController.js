@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 const User = require("./../models/user");
 const ExerciseProgram = require("./../models/exerciseProgram");
+const googleAPIKey = process.env.GOOGLE_API_KEY;
 
 const newUser = (req, res) => {
   //if the user was redirected to this route due to an error, that error will be stored in errorMessage and subsequently rendered onto the screen
@@ -94,6 +96,7 @@ const editUser = (req, res) => {
       errorMessage: req.flash("updateError")[0] || false,
       user: req.session.currentUser,
       urlEscapedLocation,
+      googleAPIKey,
     });
   } else {
     //create error page with custom messages
@@ -116,6 +119,7 @@ const showUser = async (req, res) => {
       editDeleteProfile,
       userPrograms,
       urlEscapedLocation,
+      googleAPIKey,
     });
   } catch {
     res.render("error.ejs", { error: "User not found or does not exist." });

@@ -103,41 +103,6 @@ main {
   display: flex;
 }
 
-/* .exercise-programs {
-  flex-direction: column;
-  align-items: center;
-}
-
-.exercise-programs h2 {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.exercise-programs a {
-  display: block;
-  text-decoration: none;
-  color: black;
-  width: 100%;
-}
-
-.exercise-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.exercise-card p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.exercise-card:hover {
-  background-color: grey;
-  font-style: italic;
-  border-bottom: solid black 2px;
-  border-top: solid black 2px;
-} */
 .edit-profile {
   width: 50%;
   padding: 20px;

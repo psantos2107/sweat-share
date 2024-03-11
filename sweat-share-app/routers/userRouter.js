@@ -22,3 +22,5 @@ router.get("/:id/edit", isAuthenticated, userCtrl.editUser);
 router.get("/:id", isAuthenticated, userCtrl.showUser);
 
 module.exports = router;
+
+/**/
