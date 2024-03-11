@@ -1,14 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const commentCtrl = require("./../controllers/commentsController");
+const isAuthenticated = require("./../utils/isAuthenticated");
 
 //Delete
-router.delete("/:id", commentCtrl.deleteComment);
+router.delete("/:id", isAuthenticated, commentCtrl.deleteComment);
 
 //Update
-router.patch("/:id", commentCtrl.updateComment);
+router.patch("/:id", isAuthenticated, commentCtrl.updateComment);
 
 //Create
-router.post("/", commentCtrl.createComment);
+router.post("/", isAuthenticated, commentCtrl.createComment);
 
 module.exports = router;

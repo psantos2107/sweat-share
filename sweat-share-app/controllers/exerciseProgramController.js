@@ -11,7 +11,6 @@ const allExPrograms = async (req, res) => {
   //establishing the welcome message
   let welcomeMsg = "";
   let welcomeUser = req.flash("newUserCreated");
-  let goodByeUser = req.flash("userDeleted");
   //changes the message based on whether the user is currently logged in or not
   welcomeMsg = req.session.currentUser
     ? `Welcome back, ${req.session.currentUser.username}!`
@@ -20,10 +19,6 @@ const allExPrograms = async (req, res) => {
   if (welcomeUser.length) {
     [welcomeMsg] = welcomeUser;
   }
-  if (goodByeUser.length) {
-    [welcomeMsg] = goodByeUser;
-  }
-
   let exercisePrograms;
   //getting all exercise program entries
   if (req.session.currentUser) {
@@ -50,7 +45,7 @@ const allExPrograms = async (req, res) => {
 };
 
 const newExProgram = (req, res) => {
-  res.send("exProgram new");
+  res.render("exProgramViews/new.ejs");
 };
 
 const deleteExProgram = (req, res) => {

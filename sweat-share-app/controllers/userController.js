@@ -11,19 +11,42 @@ const newUser = (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
-    await ExerciseProgram.deleteMany({ _id: req.params.id });
-    req.flash(
-      "userDeleted",
-      `Your account is closed. We're sorry to see you go.`
-    );
-    res.redirect("/exercisePrograms");
+    await ExerciseProgram.deleteMany({ createdBy: req.params.id });
+    req.session.destroy(() => {
+      console.log("session destroyed and user deleted");
+      res.redirect("/exercisePrograms");
+    });
   } catch (err) {
     console.log("There was an error with deleting the user: " + err.message);
   }
 };
 
-const updateUser = (req, res) => {
-  res.send("user patch");
+const updateUser = async (req, res) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.session.currentUser._id,
+      { $set: { ...req.body } },
+      { new: true, runValidators: true }
+    );
+    req.session.currentUser = updatedUser;
+    res.redirect(`/users/${req.session.currentUser._id}`);
+  } catch (error) {
+    let errMessage = "";
+    //catches all validation errors and logs them
+    if (error.name === "ValidationError") {
+      errMessage = Object.values(error.errors)
+        .map((err) => err.message)
+        .join(" ");
+      //catches CastErrors
+      if (error.errors?.age.name === "CastError") {
+        errMessage = "You must input a proper number for your age";
+      }
+    } else {
+      errMessage = error.message;
+    }
+    req.flash("updateError", errMessage);
+    res.redirect(`/users/${req.session.currentUser._id}/edit`);
+  }
 };
 
 const createUser = async (req, res) => {
@@ -55,19 +78,45 @@ const createUser = async (req, res) => {
     } else {
       errMessage = error.message;
     }
+    console.log(errMessage);
     req.flash("signUpError", errMessage);
     res.redirect("/users/new");
   }
 };
 
 const editUser = (req, res) => {
-  res.send("user edit");
+  if (req.session.currentUser._id === req.params.id) {
+    let urlEscapedLocation = req.session.currentUser.location
+      .split(" ")
+      .join("+");
+    res.render(`userViews/edit.ejs`, {
+      id: req.session.currentUser._id,
+      errorMessage: req.flash("updateError")[0] || false,
+      user: req.session.currentUser,
+      urlEscapedLocation,
+    });
+  } else {
+    //create error page with custom messages
+    res.send(`You cannot edit someone else's profile`);
+  }
 };
 
 const showUser = async (req, res) => {
   try {
-    const user = await db.findById(req.params.id);
-    res.render("/userViews/show.ejs", { user });
+    const user = await User.findById(req.params.id);
+    const userPrograms = await ExerciseProgram.find({
+      createdBy: user._id,
+    }).select("title description programType difficulty _id");
+    let editDeleteProfile =
+      req.session.currentUser._id === user._id.toString() ? true : false;
+    let urlEscapedLocation = user.location.split(" ").join("+"); //transforms all user locations into URL-escaped locations so that we can utilize the google maps API
+    res.render("userViews/show.ejs", {
+      user,
+      id: user._id,
+      editDeleteProfile,
+      userPrograms,
+      urlEscapedLocation,
+    });
   } catch {
     res.render("error.ejs", { error: "User not found or does not exist." });
   }

@@ -32,13 +32,6 @@ const userSchema = Schema(
     location: { type: String },
     profilePic: {
       type: String,
-      default: path.join(
-        __dirname,
-        "..",
-        "public",
-        "imgs",
-        "emptyProfilePic.jpg"
-      ),
     },
     faveExercise: { type: String },
     about: { type: String, trim: true },

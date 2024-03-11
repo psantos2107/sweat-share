@@ -17,6 +17,9 @@
     <%- include('./../partials/header.ejs', {logo: true, welcomeMsg, signup,
     login, myProfile, id}) %>
     <main>
+      <a class="create-workout" href="/exercisePrograms/new"
+        >+ CREATE A NEW WORKOUT</a
+      >
       <h1>
         <span>
           Discover new exercises made by other users and fitness lovers just
@@ -24,9 +27,11 @@
           all!
         </span>
       </h1>
+      <h2><span>What will you work out today?</span></h2>
       <section class="exercise-container">
         <%exercisePrograms.forEach(program => { %> <%-
-        include('./../partials/exerciseCard.ejs', {program}) %> <% })%>
+        include('./../partials/exerciseCard.ejs', {program, createdByIncluded:
+        true}) %> <% })%>
       </section>
     </main>
     <%- include('./../partials/footer.ejs') %>

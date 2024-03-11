@@ -1,0 +1,10 @@
+<a href="/exercisePrograms/<%=`${program._id}`%>">
+  <div class="exercise-card">
+    <h3>
+      <strong><u><%=program.title%></u></strong>
+    </h3>
+    <p>Description: <%=program.description%></p>
+    <p>Program Type: <%=program.programType.toUpperCase()%></p>
+    <p>Difficulty: <%=program.difficulty.toUpperCase()%></p>
+  </div>
+</a>

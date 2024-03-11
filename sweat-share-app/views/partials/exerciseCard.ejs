@@ -1,7 +1,11 @@
 <a href="/exercisePrograms/<%=`${program._id}`%>">
   <div class="exercise-card">
-    <h3>Name of Program: <%=program.title%></h3>
+    <h3>
+      <strong><u><%=program.title%></u></strong>
+    </h3>
+    <%if(createdByIncluded){ %>
     <h4>Created By: <%=program.createdBy.username%></h4>
+    <%}%>
     <p>Description: <%=program.description%></p>
     <p>Program Type: <%=program.programType.toUpperCase()%></p>
     <p>Difficulty: <%=program.difficulty.toUpperCase()%></p>
