@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100vh;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "KG Payphone", sans-serif;
+  position: relative;
+  background: url("/imgs/boxingGirl.jpg");
+}
+
+nav,
+footer {
+  width: 100%;
+  position: fixed;
+  z-index: 3;
+  background-color: black;
+  color: white;
+  background: linear-gradient(to right, #800020, #7b0101, #600015);
+  text-shadow: 4px 4px 4px black;
+}
+
+nav {
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  height: 8%;
+  border-bottom: solid black 4px;
+}
+
+nav * {
+  display: block;
+}
+
+nav section {
+  gap: 30px;
+  display: flex;
+}
+
+nav p {
+  align-self: center;
+  justify-self: center;
+  font-size: 2.5rem;
+  margin-left: 10px;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  margin-right: 100px;
+  font-size: 2.5rem;
+}
+.nav-link {
+  padding: 6px;
+}
+.nav-link:hover {
+  color: black;
+  font-style: italic;
+  background-color: white;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  padding: 3px;
+}
+
+.dropdown-toggle {
+  font-size: 1.6rem;
+}
+
+.dropdown-item {
+  font-size: 1.6rem;
+  text-shadow: none;
+}
+
+main {
+  width: 65vw;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: whitesmoke;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: solid black 3px;
+}
+
+main h1 {
+  margin: 5px 10px 5px 10px;
+}
+
+main a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+main a:hover {
+  color: white;
+  background-color: grey;
+  font-style: italic;
+}
+
+footer {
+  bottom: 0;
+  height: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: solid black 4px;
+}

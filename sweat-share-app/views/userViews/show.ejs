@@ -32,9 +32,9 @@
           <h2>
             <strong><u>USER'S EXERCISE PROGRAMS</u></strong>
           </h2>
-          <%userPrograms.forEach(program=>{ %>
-          <%-include('./../partials/exerciseCard.ejs', {program,
-          createdByIncluded: false}) %> <% })%>
+          <%userPrograms.forEach(program=>{%>
+          <%-include('./../partials/exerciseCard.ejs',
+          {program,createdByIncluded: false}) %> <% })%>
         </section>
         <section class="about">
           <h2><%=user.username%></h2>

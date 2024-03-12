@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 require("dotenv").config();
 const User = require("./../models/user");
+const isValidURL = require("./../utils/isValidURL");
 const ExerciseProgram = require("./../models/exerciseProgram");
 const googleAPIKey = process.env.GOOGLE_API_KEY;
 
@@ -19,12 +20,15 @@ const deleteUser = async (req, res) => {
       res.redirect("/exercisePrograms");
     });
   } catch (err) {
-    console.log("There was an error with deleting the user: " + err.message);
+    res.render("error.ejs", {
+      error: `Something went wrong. Unable to delete profile at this time.`,
+    });
   }
 };
 
 const updateUser = async (req, res) => {
   try {
+    req.body.profilePic = isValidURL(req.body.profilePic);
     const updatedUser = await User.findByIdAndUpdate(
       req.session.currentUser._id,
       { $set: { ...req.body } },
@@ -57,6 +61,7 @@ const createUser = async (req, res) => {
       //custom error handling for password length
       throw new Error("Password must be at least 6 characters long.");
     } else {
+      req.body.profilePic = isValidURL(req.body.profilePic);
       req.body.password = await bcrypt.hash(
         req.body.password,
         await bcrypt.genSalt(10)
@@ -100,7 +105,9 @@ const editUser = (req, res) => {
     });
   } else {
     //create error page with custom messages
-    res.send(`You cannot edit someone else's profile`);
+    res.render("error.ejs", {
+      error: `Either user does not exist or you do not have permission to edit this profile.`,
+    });
   }
 };
 

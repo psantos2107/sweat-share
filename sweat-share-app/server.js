@@ -54,7 +54,7 @@ app.use("/users", userRouters);
 
 //error routes
 app.use((req, res, next) => {
-  res.send("404");
+  res.status(404).render("error.ejs", { error: "Page not found." });
 });
 
 //SERVER LISTENING

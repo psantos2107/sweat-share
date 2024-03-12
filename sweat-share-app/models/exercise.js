@@ -17,11 +17,10 @@ const exerciseSchema = new Schema(
     },
     sets: { type: Number, default: 1 },
     repetitions: { type: String, default: 1 },
-    restTime: { type: String },
+    restTime: { type: String, default: "None specified" },
     imagePath: {
       type: String,
       trim: true,
-      default: path.join(__dirname, "..", "public", "imgs", "logo.jpg"),
     },
     equipmentNeeded: { type: String, trim: true, default: "Not specified" },
     muscleWorked: { type: String, default: "Not specified" },
@@ -32,4 +31,3 @@ const exerciseSchema = new Schema(
 );
 
 module.exports = exerciseSchema;
-/**/
