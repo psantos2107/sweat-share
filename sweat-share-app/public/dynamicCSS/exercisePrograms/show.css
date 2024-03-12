@@ -12,7 +12,7 @@ body {
   min-height: 100vh;
   font-family: "KG Payphone", sans-serif;
   position: relative;
-  background: url("/imgs/quadSquat.jpg");
+  background: url("/imgs/dumbellChestPress.jpg");
 }
 
 nav,
@@ -82,15 +82,13 @@ nav a {
 }
 
 main {
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 175px auto;
   width: 85vw;
 }
 
 .edit-and-delete {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 20px;
 }
 
@@ -99,78 +97,85 @@ main {
   padding: 5px;
 }
 
-.user-information {
-  width: 85vw;
-  margin: auto;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  background-color: #faf9f6;
-}
-
-.user-information section {
-  width: 50%;
-  border: solid black 2px;
-  display: flex;
-}
-
-.exercise-programs {
-  flex-direction: column;
-  align-items: center;
-}
-
-.exercise-programs h2 {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.exercise-programs a {
-  display: block;
-  text-decoration: none;
-  color: black;
+.exercise-program-container {
   width: 100%;
-}
-
-.exercise-card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
 }
 
-.exercise-card p {
+.print-PDF {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  padding: 5px;
+  font-size: 1.3rem;
+}
+
+.exercise-program-container section {
+  display: flex;
+  color: black;
+  background-color: #b8b5b5ec;
+}
+
+.exercise-program-details {
+  position: relative;
+  width: 62%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border: solid black 2px;
+}
+
+.exercise-program-details p {
+  font-size: 1.3rem;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.exercise-card:hover {
-  background-color: grey;
-  font-style: italic;
-  border-bottom: solid black 2px;
-  border-top: solid black 2px;
+.exercise-container {
+  width: 100%;
+  margin-bottom: 15px;
 }
 
-.about {
+.exercise {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+.exercise section {
+  width: 40%;
+}
+
+.exercise-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-img {
+  margin-right: 15px;
+}
+
+.exercise-image img {
+  width: 100%;
+}
+
+.comments {
+  width: 38%;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  border: solid black 2px;
 }
 
-.about p,
-.about h2 {
-  margin-top: 5px;
-  font-size: 1.5rem;
+.comments ul li {
+  font-size: 1.4rem;
 }
 
-.about img {
-  border: solid black 1px;
-}
-
-.about iframe {
-  width: 80%;
-  height: 300px;
-  margin-bottom: 20px;
-  border: solid black 1px;
+h2 {
+  margin-top: 10px;
 }
 
 footer {

@@ -83,8 +83,22 @@ const editExProgram = (req, res) => {
   res.send("exProgram edit");
 };
 
-const showExProgram = (req, res) => {
-  res.send("exProgram show");
+const showExProgram = async (req, res) => {
+  try {
+    let program = await ExerciseProgram.findById(req.params.id);
+    [program] = await populateUserNames([program]);
+    let editDeleteProgram =
+      program.createdBy._id.toString() === req.session.currentUser._id
+        ? true
+        : false;
+    res.render("exProgramViews/show.ejs", {
+      id: program._id.toString(),
+      editDeleteProgram,
+      program,
+    });
+  } catch {
+    res.render("error.ejs", { error: "The exercise program does not exist." });
+  }
 };
 
 module.exports = {
