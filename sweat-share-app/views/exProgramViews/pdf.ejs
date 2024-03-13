@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/dynamicCSS/exercisePrograms/pdf.css" />
+    <title>PDF</title>
+  </head>
+  <body>
+    <main>
+      <section class="exercise-program-details">
+        <h2>
+          <strong><u><%=program.title%></u></strong>
+        </h2>
+        <h3>Created by: <%=program.createdBy.username%></h3>
+        <p>Description: <%=program.description%></p>
+        <p>Program Type: <%=program.programType%></p>
+        <p>Difficulty: <%=program.difficulty%></p>
+        <div class="exercise-container">
+          <%program.exercises.forEach(exercise=>{ %>
+          <article class="exercise">
+            <section class="exercise-description">
+              <h2>
+                <strong><u><%=exercise.name%></u></strong>
+              </h2>
+              <p>Description: <%=exercise.description%></p>
+              <p>Sets: <%=exercise.sets%></p>
+              <p>Repetitions: <%=exercise.repetitions%></p>
+              <p>Rest Time: <%= exercise.restTime%></p>
+              <p>Equipment: <%=exercise.equipmentNeeded%></p>
+              <p>Muscles Worked: <%=exercise.muscleWorked%></p>
+            </section>
+            <section class="exercise-image">
+              <img src="<%=`${exercise.imagePath || '/imgs/logo.jpg'}`%>" />
+            </section>
+          </article>
+          <% })%>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

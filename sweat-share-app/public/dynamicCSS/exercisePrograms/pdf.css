@@ -1,0 +1,56 @@
+main {
+  width: 90vw;
+  margin: auto;
+  display: flex;
+  align-items: flex-start;
+}
+
+.exercise-program-details {
+  display: flex;
+  color: black;
+  position: relative;
+  width: 62%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  border: solid black 2px;
+}
+
+.exercise-program-details p {
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.program-title {
+  font-size: 1.5rem;
+}
+
+.exercise-container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.exercise {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+.exercise section {
+  width: 40%;
+}
+
+.exercise-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.exercise-img {
+  margin-right: 15px;
+}
+
+.exercise-image img {
+  width: 100%;
+}

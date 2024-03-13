@@ -124,6 +124,11 @@ main .exercise {
   padding: 15px;
 }
 
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+
 footer {
   bottom: 0;
   height: 5%;

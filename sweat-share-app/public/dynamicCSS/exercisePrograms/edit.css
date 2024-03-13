@@ -86,41 +86,9 @@ main {
   width: 85vw;
 }
 
-.edit-and-delete {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.edit-and-delete input {
-  font-size: 1.3rem;
-  padding: 5px;
-}
-
 .exercise-program-container {
-  width: 100%;
   display: flex;
-  align-items: flex-start;
-}
-
-.print-PDF {
-  position: absolute;
-  display: block;
-  border: solid black 1px;
-  background-color: whitesmoke;
-  text-decoration: none;
-  color: black;
-  top: 10px;
-  left: 10px;
-  z-index: 2;
-  padding: 5px;
-  font-size: 1.3rem;
-}
-
-.print-PDF:hover {
-  background-color: black;
-  font-style: italic;
-  color: white;
+  width: 100%;
 }
 
 .exercise-program-container section {
@@ -130,13 +98,15 @@ main {
 }
 
 .exercise-program-details {
-  position: relative;
-  width: 62%;
+  width: 55%;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  margin-bottom: 10px;
   border: solid black 2px;
+}
+
+.exercise-program-details h2 {
+  margin-top: 15px;
 }
 
 .exercise-program-details p {
@@ -150,14 +120,14 @@ main {
   margin-bottom: 15px;
 }
 
-.exercise {
+.exercise-show {
   display: flex;
   align-items: stretch;
   justify-content: space-evenly;
   margin-top: 15px;
 }
 
-.exercise section {
+.exercise-show section {
   width: 40%;
 }
 
@@ -174,19 +144,41 @@ main {
   width: 100%;
 }
 
-.comments {
-  width: 38%;
-  flex-direction: column;
-  align-items: center;
+main .edit-form {
+  width: 45%;
   border: solid black 2px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
 }
 
-.comments ul li {
-  font-size: 1.4rem;
+.exercise-container {
+  display: flex;
+  flex-direction: column;
 }
 
-h2 {
+.exercise-edit h3 {
   margin-top: 10px;
+}
+
+.exercise-edit button {
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.add-exercise {
+  display: block;
+  width: fit-content;
+  margin: auto;
+}
+
+.submit-form {
+  padding: 15px;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
 }
 
 footer {

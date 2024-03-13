@@ -32,7 +32,12 @@
       <% } %>
       <article class="exercise-program-container">
         <section class="exercise-program-details">
-          <button class="print-PDF" type="button">PRINT PDF</button>
+          <a
+            class="print-PDF"
+            href="/exercisePrograms/<%=program._id%>/pdf"
+            target="_blank"
+            >PRINT PDF</a
+          >
           <h2>
             <strong><u><%=program.title%></u></strong>
           </h2>

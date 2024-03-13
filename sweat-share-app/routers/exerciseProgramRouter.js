@@ -13,13 +13,16 @@ router.get("/new", isAuthenticated, exProgramCtrl.newExProgram);
 router.delete("/:id", isAuthenticated, exProgramCtrl.deleteExProgram);
 
 //Update
-router.patch("/:id", isAuthenticated, exProgramCtrl.updateExProgram);
+router.put("/:id", isAuthenticated, exProgramCtrl.updateExProgram);
 
 //Create
 router.post("/", isAuthenticated, exProgramCtrl.createExProgram);
 
 //Edit
 router.get("/:id/edit", isAuthenticated, exProgramCtrl.editExProgram);
+
+//PDF
+router.get("/:id/pdf", isAuthenticated, exProgramCtrl.createProgramPdf);
 
 //Show
 router.get("/:id", isAuthenticated, exProgramCtrl.showExProgram);

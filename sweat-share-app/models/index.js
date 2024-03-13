@@ -19,5 +19,3 @@ module.exports = {
   ExerciseProgram: require("./exerciseProgram"),
   Comment: require("./comment"),
 };
-
-/**/

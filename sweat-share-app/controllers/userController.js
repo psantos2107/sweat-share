@@ -3,6 +3,7 @@ require("dotenv").config();
 const User = require("./../models/user");
 const isValidURL = require("./../utils/isValidURL");
 const ExerciseProgram = require("./../models/exerciseProgram");
+const setErrorMessage = require("./../utils/setErrorMessage");
 const googleAPIKey = process.env.GOOGLE_API_KEY;
 
 const newUser = (req, res) => {
@@ -37,18 +38,9 @@ const updateUser = async (req, res) => {
     req.session.currentUser = updatedUser;
     res.redirect(`/users/${req.session.currentUser._id}`);
   } catch (error) {
-    let errMessage = "";
-    //catches all validation errors and logs them
-    if (error.name === "ValidationError") {
-      errMessage = Object.values(error.errors)
-        .map((err) => err.message)
-        .join(" ");
-      //catches CastErrors
-      if (error.errors?.age.name === "CastError") {
-        errMessage = "You must input a proper number for your age";
-      }
-    } else {
-      errMessage = error.message;
+    let errMessage = setErrorMessage(error);
+    if (error.errors?.age?.name === "CastError") {
+      errMessage = "You must input a proper number for your age";
     }
     req.flash("updateError", errMessage);
     res.redirect(`/users/${req.session.currentUser._id}/edit`);
@@ -72,20 +64,10 @@ const createUser = async (req, res) => {
       res.redirect(`/exercisePrograms`);
     }
   } catch (error) {
-    let errMessage = "";
-    //catches all validation errors and logs them
-    if (error.name === "ValidationError") {
-      errMessage = Object.values(error.errors)
-        .map((err) => err.message)
-        .join(" ");
-      //catches CastErrors
-      if (error.errors?.age.name === "CastError") {
-        errMessage = "You must input a proper number for your age";
-      }
-    } else {
-      errMessage = error.message;
+    let errMessage = setErrorMessage(error);
+    if (error.errors?.age?.name === "CastError") {
+      errMessage = "You must input a proper number for your age";
     }
-    console.log(errMessage);
     req.flash("signUpError", errMessage);
     res.redirect("/users/new");
   }
