@@ -176,13 +176,58 @@ main {
 
 .comments {
   width: 38%;
+  border: solid black 2px;
   flex-direction: column;
   align-items: center;
-  border: solid black 2px;
+}
+
+.comments ul {
+  padding: 8px;
 }
 
 .comments ul li {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.comment-body {
+  width: 70%;
+}
+
+.rating {
+  width: 25%;
+}
+
+.comments form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.comments form .input-comment-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.comments form .rating {
+  height: fit-content;
+  width: fit-content;
+}
+
+.comments form .post-comment {
+  display: inline-block;
+  width: fit-content;
+  margin: 10px auto 10px auto;
+  padding: 4px;
+}
+
+.add-comment-btn,
+.cancel-comment-btn {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 4px;
 }
 
 h2 {

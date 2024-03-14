@@ -19,11 +19,6 @@ const commentSchema = Schema(
       min: [1, "Rating cannot be below a 1"],
       max: [5, "Rating cannot be above a 5"],
     },
-    title: {
-      type: String,
-      required: true,
-      trim: true,
-    },
     content: {
       type: String,
       required: true,

@@ -1,22 +1,32 @@
 const ExerciseProgram = require("./exerciseProgram");
+const Comment = require("./comment");
 
-const populateUserNames = async function (program) {
-  let exercisePrograms = program;
+const populateUserNames = async function (array, modelType) {
+  let objArray = [...array];
 
   //populate createdBy so that we can access the username (exercisePrograms at this point will be an array of promises that need to all be ran still)
-  exercisePrograms = exercisePrograms.map(async (exProgram) => {
-    return await ExerciseProgram.populate(exProgram, {
-      path: "createdBy",
-      select: "username",
+  if (modelType === "exercise") {
+    objArray = objArray.map(async (obj) => {
+      return await ExerciseProgram.populate(obj, {
+        path: "createdBy",
+        select: "username",
+      });
     });
-  });
+  } else if (modelType === "comment") {
+    objArray = objArray.map(async (obj) => {
+      return await Comment.populate(obj, {
+        path: "createdBy",
+        select: "username",
+      });
+    });
+  }
 
   //runs the array of promises in parallel with Promise.allSettled
-  exercisePrograms = await Promise.allSettled(exercisePrograms);
+  objArray = await Promise.allSettled(objArray);
 
   //maps the new set of exercisePrograms (Promise.allsettled returns an array of objects with status and "value")
-  exercisePrograms = exercisePrograms.map((exProgram) => exProgram.value);
-  return exercisePrograms;
+  objArray = objArray.map((obj) => obj.value);
+  return objArray;
 };
 
 module.exports = populateUserNames;

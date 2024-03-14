@@ -6,9 +6,6 @@ const isAuthenticated = require("./../utils/isAuthenticated");
 //Delete
 router.delete("/:id", isAuthenticated, commentCtrl.deleteComment);
 
-//Update
-router.patch("/:id", isAuthenticated, commentCtrl.updateComment);
-
 //Create
 router.post("/", isAuthenticated, commentCtrl.createComment);
 

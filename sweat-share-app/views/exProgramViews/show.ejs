@@ -17,13 +17,16 @@
     <%- include('./../partials/header.ejs', {logo: true, welcomeMsg: `View a
     Program!`, signup: false, login:false, myProfile:true, id}) %>
     <main>
-      <% if (editDeleteProgram){ %>
+      <% if (userViewingOwnProgram){ %>
       <aside class="edit-and-delete">
-        <form action="/exercisePrograms/<%=`${id}`%>/edit" method="GET">
+        <form
+          action="/exercisePrograms/<%=`${program._id}`%>/edit"
+          method="GET"
+        >
           <input type="submit" value="EDIT THIS EXERCISE PROGRAM" />
         </form>
         <form
-          action="/exercisePrograms/<%=`${id}`%>?_method=DELETE"
+          action="/exercisePrograms/<%=`${program._id}`%>?_method=DELETE"
           method="POST"
         >
           <input type="submit" value="DELETE THIS EXERCISE PROGRAM" />
@@ -69,11 +72,47 @@
         <section class="comments">
           <h2>
             <strong><u>COMMENTS</u></strong>
-            <ul>
-              <li>Loved the exercise</li>
-              <li>It was okay</li>
-            </ul>
           </h2>
+          <h3>Overall Rating: <%=`${overallRating.toFixed(1)}`%>/5</h3>
+          <ul>
+            <%if(comments){ %> <%comments.forEach(comment=>{ %> <%-
+            include('./../partials/comment.ejs', {comment})%> <%})%> <% } %>
+          </ul>
+          <%if(!userViewingOwnProgram){ %>
+          <form action="/comments" method="POST">
+            <section class="input-comment-section">
+              <textarea
+                id="add-comment"
+                placeholder="Add your comment here"
+                name="content"
+                rows="4"
+                cols="40"
+                style="padding: 8px"
+                required
+              ></textarea>
+              <select
+                class="rating"
+                name="rating"
+                id="program-rating"
+                placeholder="rating"
+                required
+              >
+                <option value="" disabled selected>Select Rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </section>
+            <input
+              type="hidden"
+              name="exerciseProgram"
+              value="<%=program._id%>"
+            />
+            <input class="post-comment" type="submit" value="POST COMMENT!" />
+          </form>
+          <%}%>
         </section>
       </article>
     </main>

@@ -6,6 +6,7 @@ const puppeteer = require("puppeteer");
 const populateUserNames = require("../models/populateUserNames");
 const isValidURL = require("./../utils/isValidURL");
 const setErrorMessage = require("../utils/setErrorMessage");
+const getProgramRating = require("./../models/getProgramRating");
 
 const allExPrograms = async (req, res) => {
   try {
@@ -33,13 +34,13 @@ const allExPrograms = async (req, res) => {
       exercisePrograms = await ExerciseProgram.find({})
         .select("title createdBy description programType difficulty _id")
         .sort("-createdAt");
-      exercisePrograms = await populateUserNames(exercisePrograms);
+      exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
     } else {
       //find all entries
       exercisePrograms = await ExerciseProgram.find({}).select(
         "title createdBy description programType difficulty _id"
       );
-      exercisePrograms = await populateUserNames(exercisePrograms);
+      exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
     }
 
     res.render("exProgramviews/index.ejs", {
@@ -119,7 +120,7 @@ const editExProgram = async (req, res) => {
     if (!(req.session.currentUser._id === program.createdBy.toString())) {
       throw new Error();
     }
-    [program] = await populateUserNames([program]);
+    [program] = await populateUserNames([program], "exercise");
     const errorMessage = req.flash("editExProgError");
     res.render("exProgramViews/edit.ejs", {
       errorMessage,
@@ -137,17 +138,28 @@ const editExProgram = async (req, res) => {
 const showExProgram = async (req, res) => {
   try {
     let program = await ExerciseProgram.findById(req.params.id);
-    [program] = await populateUserNames([program]);
-    let editDeleteProgram =
+    [program] = await populateUserNames([program], "exercise");
+    let comments = await Comment.find({ exerciseProgram: program._id });
+    if (comments.length > 0) {
+      comments = await populateUserNames(comments, "comment");
+    } else {
+      comments = null;
+    }
+    let [programRating] = await getProgramRating(program._id);
+    console.log(programRating);
+    let userViewingOwnProgram =
       program.createdBy._id.toString() === req.session.currentUser._id
         ? true
         : false;
     res.render("exProgramViews/show.ejs", {
-      id: program._id.toString(),
-      editDeleteProgram,
+      id: req.session.currentUser._id,
+      userViewingOwnProgram,
       program,
+      comments,
+      overallRating: programRating.overallRating,
     });
-  } catch {
+  } catch (err) {
+    console.log(err);
     res.render("error.ejs", { error: "The exercise program does not exist." });
   }
 };
@@ -162,8 +174,8 @@ const createProgramPdf = async (req, res) => {
       path.join(__dirname, "..", "views", "exProgramViews", "pdf.ejs"),
       { program }
     );
-    await page.setContent(html, { waitUntil: "networkidle0" });
-    const pdf = await page.pdf({ format: "A4" });
+    await page.setContent(html);
+    const pdf = await page.pdf({ format: "A4", printBackground: true });
     res.contentType("application/pdf");
     res.send(pdf);
   } catch (error) {
@@ -177,8 +189,6 @@ const createProgramPdf = async (req, res) => {
       await browser.close();
     }
   }
-  // const program = await ExerciseProgram.findById(req.params.id);
-  // res.render("exProgramViews/pdf.ejs", { program });
 };
 
 module.exports = {

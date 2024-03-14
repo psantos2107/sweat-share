@@ -104,7 +104,7 @@ const showUser = async (req, res) => {
     let urlEscapedLocation = user.location.split(" ").join("+"); //transforms all user locations into URL-escaped locations so that we can utilize the google maps API
     res.render("userViews/show.ejs", {
       user,
-      id: user._id,
+      id: req.session.currentUser._id,
       editDeleteProfile,
       userPrograms,
       urlEscapedLocation,

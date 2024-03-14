@@ -1,0 +1,9 @@
+<li>
+  <p class="comment-body">
+    <%=comment.content%> -
+    <a href="/users/<%=comment.createdBy._id%>"
+      ><%=comment.createdBy.username%></a
+    >
+  </p>
+  <p class="rating">Rating: <%=comment.rating%>/5</p>
+</li>
