@@ -9,7 +9,6 @@ const createComment = async (req, res) => {
     const commentObj = { ...req.body };
     commentObj.createdBy = req.session.currentUser._id;
     await Comment.create(commentObj);
-    console.log("hits here", commentObj.exerciseProgram);
     res.redirect(`/exercisePrograms/${commentObj.exerciseProgram}`);
   } catch (err) {
     console.error(err);

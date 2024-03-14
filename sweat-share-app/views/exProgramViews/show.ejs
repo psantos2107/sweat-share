@@ -16,6 +16,7 @@
   <body>
     <%- include('./../partials/header.ejs', {logo: true, welcomeMsg: `View a
     Program!`, signup: false, login:false, myProfile:true, id}) %>
+    <a class="return-home" href="/exercisePrograms">BACK TO HOME PAGE</a>
     <main>
       <% if (userViewingOwnProgram){ %>
       <aside class="edit-and-delete">
@@ -44,7 +45,12 @@
           <h2>
             <strong><u><%=program.title%></u></strong>
           </h2>
-          <h3>Created by: <%=program.createdBy.username%></h3>
+          <h3>
+            Created by:
+            <a href="/users/<%=program.createdBy._id%>"
+              ><%=program.createdBy.username%></a
+            >
+          </h3>
           <p>Description: <%=program.description%></p>
           <p>Program Type: <%=program.programType%></p>
           <p>Difficulty: <%=program.difficulty%></p>
@@ -73,9 +79,10 @@
           <h2>
             <strong><u>COMMENTS</u></strong>
           </h2>
+          <%if(comments){ %>
           <h3>Overall Rating: <%=`${overallRating.toFixed(1)}`%>/5</h3>
           <ul>
-            <%if(comments){ %> <%comments.forEach(comment=>{ %> <%-
+            <%comments.forEach(comment=>{ %> <%-
             include('./../partials/comment.ejs', {comment})%> <%})%> <% } %>
           </ul>
           <%if(!userViewingOwnProgram){ %>

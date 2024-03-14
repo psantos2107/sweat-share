@@ -15,6 +15,25 @@ body {
   background: url("/imgs/quadSquat.jpg");
 }
 
+.return-home {
+  position: absolute;
+  left: 30px;
+  top: -70px;
+  width: fit-content;
+  border: solid black 2px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  background-color: rgb(179, 177, 177);
+  font-size: 1.3rem;
+}
+
+.return-home:hover {
+  background-color: black;
+  color: white;
+  font-style: italic;
+}
+
 nav,
 footer {
   width: 100%;
@@ -82,7 +101,7 @@ nav a {
 }
 
 main {
-  margin-top: 100px;
+  margin-top: 180px;
   margin-left: auto;
   margin-right: auto;
   width: 85vw;

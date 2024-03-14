@@ -19,6 +19,7 @@ const allExPrograms = async (req, res) => {
     //establishing the welcome message
     let welcomeMsg = "";
     let welcomeUser = req.flash("newUserCreated");
+
     //changes the message based on whether the user is currently logged in or not
     welcomeMsg = req.session.currentUser
       ? `Welcome back, ${req.session.currentUser.username}!`
@@ -29,19 +30,11 @@ const allExPrograms = async (req, res) => {
     }
     let exercisePrograms;
     //getting all exercise program entries
-    if (req.session.currentUser) {
-      //finds all ex programs, selects the fields that we want to display in the index, and sorts based on how recent things were created.
-      exercisePrograms = await ExerciseProgram.find({})
-        .select("title createdBy description programType difficulty _id")
-        .sort("-createdAt");
-      exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
-    } else {
-      //find all entries
-      exercisePrograms = await ExerciseProgram.find({}).select(
-        "title createdBy description programType difficulty _id"
-      );
-      exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
-    }
+    //finds all ex programs, selects the fields that we want to display in the index, and sorts based on how recent things were created.
+    exercisePrograms = await ExerciseProgram.find({})
+      .select("title createdBy description programType difficulty _id")
+      .sort("-createdAt");
+    exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
 
     res.render("exProgramviews/index.ejs", {
       welcomeMsg,
@@ -51,7 +44,8 @@ const allExPrograms = async (req, res) => {
       id,
       exercisePrograms,
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.render("error.ejs", {
       error: `Something went wrong loading exercises. Please click the link to retry route again.`,
     });
@@ -71,7 +65,8 @@ const deleteExProgram = async (req, res) => {
     await Comment.deleteMany({ exerciseProgram: req.params.id }); //removes all comments related to the exerciseProgram
     await ExerciseProgram.findByIdAndDelete(req.params.id); //removes the exercise program
     res.redirect(`/users/${req.session.currentUser._id}`);
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.render("error.ejs", { error: "Failed to delete exercise program." });
   }
 };
@@ -89,7 +84,8 @@ const updateExProgram = async (req, res) => {
       { new: true, runValidators: true }
     );
     res.redirect(`/exercisePrograms/${newProgram._id}`);
-  } catch {
+  } catch (error) {
+    console.error(error);
     let errMessage =
       'Error with editing exercise. Ensure all "set" fields have a valid number and make sure all required fields are inputted';
     req.flash("editExProgError", errMessage);
@@ -116,7 +112,6 @@ const createExProgram = async (req, res) => {
 const editExProgram = async (req, res) => {
   try {
     let program = await ExerciseProgram.findById(req.params.id);
-    console.log(req.session.currentUser._id, program.createdBy.toString());
     if (!(req.session.currentUser._id === program.createdBy.toString())) {
       throw new Error();
     }
@@ -127,7 +122,8 @@ const editExProgram = async (req, res) => {
       id: req.session.currentUser._id,
       program,
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.render("error.ejs", {
       error:
         "Either the program does not exist, or you are not authorized to edit this program.",
@@ -146,7 +142,6 @@ const showExProgram = async (req, res) => {
       comments = null;
     }
     let [programRating] = await getProgramRating(program._id);
-    console.log(programRating);
     let userViewingOwnProgram =
       program.createdBy._id.toString() === req.session.currentUser._id
         ? true
@@ -156,10 +151,10 @@ const showExProgram = async (req, res) => {
       userViewingOwnProgram,
       program,
       comments,
-      overallRating: programRating.overallRating,
+      overallRating: programRating?.overallRating,
     });
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    console.error(error);
     res.render("error.ejs", { error: "The exercise program does not exist." });
   }
 };
@@ -167,14 +162,21 @@ const showExProgram = async (req, res) => {
 const createProgramPdf = async (req, res) => {
   let browser;
   try {
+    //find program
     const program = await ExerciseProgram.findById(req.params.id);
+
+    //launch a headless browser via puppeteer, create a new page on that browser
     browser = await puppeteer.launch();
     const page = await browser.newPage();
+
+    //render html string via EJS templates, and set that content to the page that puppeteer launched
     const html = await ejs.renderFile(
       path.join(__dirname, "..", "views", "exProgramViews", "pdf.ejs"),
       { program }
     );
     await page.setContent(html);
+
+    //convert the page to a pdf, set content headers so that the response is sent as a pdf, A4 is standard pdf format (8.5x11)
     const pdf = await page.pdf({ format: "A4", printBackground: true });
     res.contentType("application/pdf");
     res.send(pdf);
@@ -185,6 +187,7 @@ const createProgramPdf = async (req, res) => {
         "Either the program does not exist or something went wrong with producing the PDF",
     });
   } finally {
+    //close the browser created by puppeteer REGARDLESS of whether the PDF was successfully made or not
     if (browser) {
       await browser.close();
     }

@@ -18,6 +18,25 @@ body {
   justify-content: center;
 }
 
+.return-home {
+  position: absolute;
+  left: 30px;
+  top: 100px;
+  width: fit-content;
+  border: solid black 2px;
+  padding: 5px;
+  text-decoration: none;
+  color: black;
+  background-color: rgb(179, 177, 177);
+  font-size: 1.3rem;
+}
+
+.return-home:hover {
+  background-color: black;
+  color: white;
+  font-style: italic;
+}
+
 nav,
 footer {
   width: 100%;

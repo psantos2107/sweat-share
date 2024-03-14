@@ -1335,7 +1335,7 @@ async function seedExProgramData() {
   console.log(
     `Added ${
       exerciseProgramData1.length + exerciseProgramData2.length
-    } exercise prorams to the database`
+    } exercise programs to the database`
   );
   process.exit();
 }
@@ -1351,5 +1351,3 @@ seedUserData()
     console.log("Could not seed database:\n" + err);
     process.exit();
   });
-
-/**/

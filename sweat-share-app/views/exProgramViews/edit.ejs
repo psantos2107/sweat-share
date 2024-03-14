@@ -16,6 +16,9 @@
   <body>
     <%- include('./../partials/header.ejs', {logo: false, welcomeMsg: `Edit this
     Program!`, signup: false, login:false, myProfile:true, id}) %>
+    <a class="return-home" href="/exercisePrograms/<%=program._id%>"
+      >BACK TO EXERCISE PROGRAM PAGE</a
+    >
     <main>
       <article class="exercise-program-container">
         <section class="exercise-program-details">
@@ -56,8 +59,8 @@
             <h2>
               <u
                 ><strong
-                  >Fill out the form below to create a new exercise
-                  program!</strong
+                  >Fill out the form below to edit the exercise program on the
+                  left!</strong
                 ></u
               >
             </h2>

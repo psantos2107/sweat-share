@@ -16,6 +16,9 @@
   <body>
     <%- include('./../partials/header.ejs', {logo: false, welcomeMsg: `Edit your
     profile!`, signup: false, login:false, myProfile:true, id}) %>
+    <a class="return-home" href="/users/<%=user._id%>"
+      >BACK TO YOUR USER PAGE</a
+    >
     <main>
       <article class="user-information">
         <section class="edit-profile">

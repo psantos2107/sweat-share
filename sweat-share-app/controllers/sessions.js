@@ -25,7 +25,7 @@ const createSession = async (req, res) => {
       res.redirect("/sessions/new");
     }
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 

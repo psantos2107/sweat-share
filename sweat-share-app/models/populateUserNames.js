@@ -30,5 +30,3 @@ const populateUserNames = async function (array, modelType) {
 };
 
 module.exports = populateUserNames;
-
-/**/

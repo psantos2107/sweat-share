@@ -3,6 +3,7 @@ require("dotenv").config();
 const User = require("./../models/user");
 const isValidURL = require("./../utils/isValidURL");
 const ExerciseProgram = require("./../models/exerciseProgram");
+const Comment = require("./../models/comment");
 const setErrorMessage = require("./../utils/setErrorMessage");
 const googleAPIKey = process.env.GOOGLE_API_KEY;
 
@@ -16,11 +17,13 @@ const deleteUser = async (req, res) => {
   try {
     await User.findByIdAndDelete(req.params.id);
     await ExerciseProgram.deleteMany({ createdBy: req.params.id });
+    await Comment.deleteMany({ createdBy: req.params.id });
     req.session.destroy(() => {
       console.log("session destroyed and user deleted");
       res.redirect("/exercisePrograms");
     });
   } catch (err) {
+    console.error(err);
     res.render("error.ejs", {
       error: `Something went wrong. Unable to delete profile at this time.`,
     });
@@ -38,6 +41,7 @@ const updateUser = async (req, res) => {
     req.session.currentUser = updatedUser;
     res.redirect(`/users/${req.session.currentUser._id}`);
   } catch (error) {
+    console.error(error);
     let errMessage = setErrorMessage(error);
     if (error.errors?.age?.name === "CastError") {
       errMessage = "You must input a proper number for your age";
@@ -64,6 +68,7 @@ const createUser = async (req, res) => {
       res.redirect(`/exercisePrograms`);
     }
   } catch (error) {
+    console.error(error);
     let errMessage = setErrorMessage(error);
     if (error.errors?.age?.name === "CastError") {
       errMessage = "You must input a proper number for your age";
@@ -110,7 +115,8 @@ const showUser = async (req, res) => {
       urlEscapedLocation,
       googleAPIKey,
     });
-  } catch {
+  } catch (error) {
+    console.error(error);
     res.render("error.ejs", { error: "User not found or does not exist." });
   }
 };

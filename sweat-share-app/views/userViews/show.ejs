@@ -16,6 +16,7 @@
   <body>
     <%- include('./../partials/header.ejs', {logo: true, welcomeMsg: false,
     signup: false, login:false, myProfile:true, id}) %>
+    <a class="return-home" href="/exercisePrograms">BACK TO HOME PAGE</a>
     <main>
       <% if (editDeleteProfile){ %>
       <aside class="edit-and-delete">
