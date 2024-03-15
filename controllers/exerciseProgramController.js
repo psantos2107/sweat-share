@@ -49,7 +49,7 @@ const allExPrograms = async (req, res) => {
     //finally, you populate the usernames of the "createdBy" field in exercisePrograms for display on the index page (stored in a separate function)
     exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
 
-    res.render("exProgramviews/index.ejs", {
+    res.render("exProgramViews/index.ejs", {
       welcomeMsg,
       signup,
       login,
