@@ -40,6 +40,7 @@
         <section class="about">
           <h2><%=user.username%></h2>
           <img
+            class="profile-pic"
             src="<%=`${(user.profilePic || '/imgs/emptyProfilePic.jpg')}`%>"
           />
           <p>Name: <%=`${user.firstName} ${user.lastName}`%></p>
@@ -69,7 +70,7 @@
   <script>
     function logOut(id) {
       fetch(`/sessions`, { method: "DELETE" })
-        .then((res) => {
+        .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to sign out.");
           }

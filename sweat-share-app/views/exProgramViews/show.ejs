@@ -80,10 +80,13 @@
             <strong><u>COMMENTS</u></strong>
           </h2>
           <%if(comments){ %>
-          <h3>Overall Rating: <%=`${overallRating.toFixed(1)}`%>/5</h3>
+          <h3>
+            Overall Exercise Program Rating:
+            <%=`${overallRating.toFixed(1)}`%>/5
+          </h3>
           <ul>
             <%comments.forEach(comment=>{ %> <%-
-            include('./../partials/comment.ejs', {comment})%> <%})%> <% } %>
+            include('./../partials/comment.ejs', {comment, id})%> <%})%> <% } %>
           </ul>
           <%if(!userViewingOwnProgram){ %>
           <form action="/comments" method="POST">

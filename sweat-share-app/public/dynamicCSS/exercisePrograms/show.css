@@ -253,6 +253,20 @@ a:hover {
   width: fit-content;
 }
 
+.delete-comment {
+  font-size: 1rem;
+  background: rgb(134, 3, 3);
+  color: white;
+  border: solid black 1px;
+  padding: 0px 2px;
+}
+
+.delete-comment:hover {
+  background-color: black;
+  color: white;
+  font-style: italic;
+}
+
 .comments form .post-comment {
   display: inline-block;
   width: fit-content;

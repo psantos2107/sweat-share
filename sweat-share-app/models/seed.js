@@ -10,6 +10,8 @@ const userData = [
     firstName: "John",
     lastName: "Doe",
     age: 30,
+    profilePic:
+      "https://i.pinimg.com/564x/d8/18/83/d818834e0efec1ea8f6a9c9c31fc357e.jpg",
     location: "New York City, NY",
     faveExercise: "Running",
     about: "Fitness enthusiast",
@@ -19,6 +21,8 @@ const userData = [
     password: "abc123",
     firstName: "Emily",
     lastName: "Smith",
+    profilePic:
+      "https://i.pinimg.com/564x/ab/17/cf/ab17cfc4a4237453af647c5474dd90ad.jpg",
     age: 25,
     location: "Los Angeles, CA",
     faveExercise: "Yoga",
@@ -29,6 +33,8 @@ const userData = [
     password: "passw0rd",
     firstName: "Alex",
     lastName: "Jones",
+    profilePic:
+      "https://i.pinimg.com/564x/b9/ff/20/b9ff20687e9a79a01f680aa854318728.jpg",
     age: 35,
     location: "Chicago, IL",
     faveExercise: "Weightlifting",
@@ -39,6 +45,8 @@ const userData = [
     password: "sarah123",
     firstName: "Sarah",
     lastName: "Brown",
+    profilePic:
+      "https://i.pinimg.com/564x/de/05/3f/de053f4928c44a8c002a68535309a024.jpg",
     age: 28,
     location: "Houston, TX",
     faveExercise: "Cycling",
@@ -49,6 +57,8 @@ const userData = [
     password: "mike456",
     firstName: "Michael",
     lastName: "Adams",
+    profilePic:
+      "https://i.pinimg.com/564x/71/e9/26/71e926a3720c434cf4612ecb1075c35f.jpg",
     age: 40,
     location: "Philadelphia, PA",
     faveExercise: "Swimming",
@@ -59,6 +69,8 @@ const userData = [
     password: "laura789",
     firstName: "Laura",
     lastName: "Wilson",
+    profilePic:
+      "https://i.pinimg.com/564x/f1/6d/75/f16d759f39a8220f37b0d93f93a2a1b6.jpg",
     age: 33,
     location: "Phoenix, AZ",
     faveExercise: "Pilates",
@@ -71,6 +83,8 @@ const userData = [
     lastName: "Miller",
     age: 27,
     location: "San Diego, CA",
+    profilePic:
+      "https://i.pinimg.com/564x/14/0d/19/140d19cbcb7006e6ef0f2da7177b9a5a.jpg",
     faveExercise: "Rock Climbing",
     about: "Adventure seeker",
   },
@@ -81,6 +95,8 @@ const userData = [
     lastName: "Clark",
     age: 29,
     location: "Dallas, TX",
+    profilePic:
+      "https://i.pinimg.com/736x/e7/fc/28/e7fc28591d480537c11c543c834e2380.jpg",
     faveExercise: "Boxing",
     about: "Fitness blogger",
   },
@@ -89,6 +105,8 @@ const userData = [
     password: "ryanr22",
     firstName: "Ryan",
     lastName: "Robinson",
+    profilePic:
+      "https://i.pinimg.com/564x/5f/2c/b4/5f2cb48312fb87ad2c3c156fe9cce01e.jpg",
     age: 32,
     location: "San Francisco, CA",
     faveExercise: "CrossFit",
@@ -101,6 +119,8 @@ const userData = [
     lastName: "Hernandez",
     age: 26,
     location: "Miami, FL",
+    profilePic:
+      "https://i.pinimg.com/564x/29/2c/8d/292c8ddf868fce80f6b881a7a9a7631c.jpg",
     faveExercise: "Dancing",
     about: "Dance instructor and choreographer",
   },
@@ -142,6 +162,8 @@ const userData = [
     age: 27,
     location: "Austin, TX",
     faveExercise: "Basketball",
+    profilePic:
+      "https://i.pinimg.com/564x/4c/bb/68/4cbb680d3483f8bce3c5f481e6468f5f.jpg",
     about: "Tech enthusiast and basketball player",
   },
   {
@@ -149,6 +171,8 @@ const userData = [
     password: "jenny456",
     firstName: "Jennifer",
     lastName: "Nguyen",
+    profilePic:
+      "https://i.pinimg.com/564x/ca/10/57/ca10576437ee4339f9883de03075c562.jpg",
     age: 28,
     location: "Portland, OR",
     faveExercise: "Zumba",

@@ -1,7 +1,17 @@
 const Comment = require("./../models/comment");
 
-const deleteComment = (req, res) => {
-  res.send("comment delete");
+const deleteComment = async (req, res) => {
+  try {
+    const comment = await Comment.findById(req.params.id);
+    await Comment.findByIdAndDelete(req.params.id);
+    res.redirect(`/exercisePrograms/${comment.exerciseProgram.toString()}`);
+  } catch (error) {
+    console.error(error);
+    res.render("error.ejs", {
+      error:
+        "Unable to delete comment at this time. (Either comment not found or something else went wrong)",
+    });
+  }
 };
 
 const createComment = async (req, res) => {

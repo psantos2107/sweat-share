@@ -1,6 +1,5 @@
 const queryAndSortExPrograms = function (queryObj, query) {
   let exProgramQuery = query;
-  console.log(query);
   if (queryObj?.difficulty) {
     exProgramQuery = exProgramQuery
       .where("difficulty")

@@ -5,5 +5,12 @@
       ><%=comment.createdBy.username%></a
     >
   </p>
-  <p class="rating">Rating: <%=comment.rating%>/5</p>
+  <div>
+    <p class="comment-rating">Rating: <%=comment.rating%>/5</p>
+    <%if(comment.createdBy._id.toString() === id){ %>
+    <form action="/comments/<%=comment._id%>?_method=DELETE" method="POST">
+      <input class="delete-comment" type="submit" value="DELETE COMMENT" />
+    </form>
+    <%}%>
+  </div>
 </li>
