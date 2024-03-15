@@ -22,28 +22,31 @@ const allExPrograms = async (req, res) => {
     let myProfile = req.session.currentUser ? true : false;
     let id = req.session.currentUser ? req.session.currentUser._id : null;
 
-    //establishing the welcome message
+    //WELCOME MESSAGE LOGIC------------------
     let welcomeMsg = "";
-    let welcomeUser = req.flash("newUserCreated");
-
     //changes the message based on whether the user is currently logged in or not
     welcomeMsg = req.session.currentUser
       ? `Welcome back, ${req.session.currentUser.username}!`
       : "Welcome, guest!";
-    //then changes the message if a certain event, such as deleting an account, or creation of a new user, happened (if needed)
+
+    //then changes the message if the user was redirected just after creating their profile, (this message would override the login message)
+    let welcomeUser = req.flash("newUserCreated");
     if (welcomeUser.length) {
       [welcomeMsg] = welcomeUser;
     }
-    let exercisePrograms;
-    //getting all exercise program entries
-    //finds all ex programs, selects the fields that we want to display in the index, and sorts based on how recent things were created.
-    exercisePrograms = ExerciseProgram.find({}).select(
+
+    //GETTING ALL EXERCISE PROGRAMS---------------------
+    //finds all exercise programs, then selects the fields that we want to display in the exercise cards on the index page
+    let exerciseProgramQuery = ExerciseProgram.find({}).select(
       "title createdBy description programType difficulty _id"
     );
-    exercisePrograms = await queryAndSortExPrograms(
+    //runs the exerciseProgramQuery through a method that further sifts through querying and sorting (if there is any at all), then awaits the response and stores in "exercise programs" (stored in a separate function)
+    let exercisePrograms = await queryAndSortExPrograms(
       req.query,
-      exercisePrograms
+      exerciseProgramQuery
     );
+
+    //finally, you populate the usernames of the "createdBy" field in exercisePrograms for display on the index page (stored in a separate function)
     exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
 
     res.render("exProgramviews/index.ejs", {
