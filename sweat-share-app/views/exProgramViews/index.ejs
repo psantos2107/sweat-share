@@ -28,6 +28,42 @@
         </span>
       </h1>
       <h2><span>What will you work out today?</span></h2>
+      <aside class="query">
+        <h3>Filter and Sort!</h3>
+        <div>
+          <span>By difficulty: </span>
+          <select class="query-difficulty">
+            <option value="all">All</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+        <div>
+          <span>By program type: </span>
+          <select class="query-program-type">
+            <option value="all">All</option>
+            <option value="cardio">Cardio</option>
+            <option value="power">Power</option>
+            <option value="endurance">Endurance</option>
+            <option value="flexibility">Flexibility</option>
+            <option value="balance">Balance</option>
+            <option value="plyometrics">Plyometrics</option>
+            <option value="functional">Functional</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div>
+          <span>Sort by:</span>
+          <select class="query-sort">
+            <option value="-createdAt">Newest to Oldest</option>
+            <option value="createdAt">Oldest to Newest</option>
+            <option value="title">Alphabetical Order A-Z</option>
+            <option value="-title">Reverse Alphabetical Order Z-A</option>
+          </select>
+        </div>
+        <button class="submit-query">SUBMIT</button>
+      </aside>
       <section class="exercise-container">
         <%exercisePrograms.forEach(program => { %> <%-
         include('./../partials/exerciseCard.ejs', {program, createdByIncluded:
@@ -54,5 +90,24 @@
           console.log(err);
         });
     }
+
+    const queryDifficulty = document.querySelector(".query-difficulty");
+    const queryProgramType = document.querySelector(".query-program-type");
+    const querySort = document.querySelector(".query-sort");
+    const submitQuery = document.querySelector(".submit-query");
+    let queryString = "/exercisePrograms?";
+
+    submitQuery.addEventListener("click", (e) => {
+      e.preventDefault();
+      if (queryDifficulty.value !== "all") {
+        queryString += `difficulty=${queryDifficulty.value}&`;
+      }
+      if (queryProgramType.value !== "all") {
+        queryString += `programType=${queryProgramType.value}&`;
+      }
+      queryString += `sort=${querySort.value}`;
+
+      window.location.href = `${queryString}`;
+    });
   </script>
 </html>

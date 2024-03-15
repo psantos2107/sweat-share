@@ -1,12 +1,18 @@
+//Core modules
 const path = require("path");
-const ExerciseProgram = require("./../models/exerciseProgram");
-const Comment = require("./../models/comment");
+
+//3rd party modules
 const ejs = require("ejs");
 const puppeteer = require("puppeteer");
+
+//our own modules
+const ExerciseProgram = require("./../models/exerciseProgram");
+const Comment = require("./../models/comment");
 const populateUserNames = require("../models/populateUserNames");
 const isValidURL = require("./../utils/isValidURL");
 const setErrorMessage = require("../utils/setErrorMessage");
 const getProgramRating = require("./../models/getProgramRating");
+const queryAndSortExPrograms = require("./../models/queryAndSortExPrograms");
 
 const allExPrograms = async (req, res) => {
   try {
@@ -31,9 +37,13 @@ const allExPrograms = async (req, res) => {
     let exercisePrograms;
     //getting all exercise program entries
     //finds all ex programs, selects the fields that we want to display in the index, and sorts based on how recent things were created.
-    exercisePrograms = await ExerciseProgram.find({})
-      .select("title createdBy description programType difficulty _id")
-      .sort("-createdAt");
+    exercisePrograms = ExerciseProgram.find({}).select(
+      "title createdBy description programType difficulty _id"
+    );
+    exercisePrograms = await queryAndSortExPrograms(
+      req.query,
+      exercisePrograms
+    );
     exercisePrograms = await populateUserNames(exercisePrograms, "exercise");
 
     res.render("exProgramviews/index.ejs", {
