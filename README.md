@@ -107,5 +107,9 @@ Other Projects:
 - Pokemon Trivia Game: https://github.com/psantos2107/pokemon-trivia-game
 
 ## Acknowledgments:
-- ChatGPT 4.0 for assistance with debugging and learning how to implement different features in the application
+- ChatGPT 4.0 for assistance with debugging and learning how to implement different features in the application (such as how to use connect-flash )
 - Bootstrap CSS (https://getbootstrap.com/): for the carousel component, dropdown menu component, and form components
+- https://www.cdnfonts.com/ : Where I obtained the font used throughout the project.
+- Where I learned how to use puppeteer: https://stackoverflow.com/questions/74255357/express-puppeteer-generate-pdf-from-ejs-template-and-send-as-response
+- Puppeteer API site: https://pptr.dev/
+- Mongoose site: https://mongoosejs.com/docs/api/mongoose.html (to reference where I learned how to use aggregation pipeline and query functions)
