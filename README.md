@@ -70,6 +70,7 @@ For my project, my initial goal was to establish the file architecture and ensur
 - Ability to create, edit, delete, and view users and exercise programs throughout the application
 - Ability to add comments to other users' exercise programs to provide feedback for the programs
 - Ability to login and logout of the application
+- Data validation with components to give client feedback if errors occur
 
 ## Unresolved Stretch Goals (IceBox/Next Steps to be Performed later):
 - Did not implement pagination
