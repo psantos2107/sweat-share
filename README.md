@@ -11,8 +11,26 @@ Sweat share is an application where fitness professionals, enthusiasts, and love
 ## Entity Relationship Diagram
 <img width="705" alt="Screenshot 2024-03-02 at 10 36 59 AM" src="https://github.com/psantos2107/sweat-share/assets/146752384/b65b0da0-495a-4737-80c8-3d2e19bab391">
 
+## Trello Board
+https://trello.com/b/fH9bQkie/sweatshare
+
 ## Link to Live Site:
 https://sweatshare-6d68a7df5043.herokuapp.com/
+
+## Installation Instructions 
+- Fork and clone this repo.
+- Obtain a Google Maps Embed API Key here: https://developers.google.com/maps/documentation/embed/quickstart. Store it in a .env file in a variable called GOOGLE_API_KEY.
+- Ensure you have a mongoDB account (https://www.mongodb.com/), and connect a database to this repo. Store the database connection URI to your .env file in a variable called MONGODBURI.
+- Run 'npm install' in the command line for this repo to install all necessary node modules
+
+```
+npm install
+```
+- Run 'npm run seed' to seed the database with users, exercises, and exercise programs.
+
+```
+npm run seed
+```
 
 ## Technologies Used:
 - HTML5
@@ -37,6 +55,21 @@ NPM Modules:
 
 ## Approach Taken
 For my project, my initial goal was to establish the file architecture and ensure that all routes were created and routed to the correct places. I implemented an MVC (models-views-controllers) file architecture with a particular focus on practicing the principle of "separation of concerns". A separate routers and utils folder was also created to ensure further modularity of the codebase. After file architecture was established, routers were created using Express.js and routes were tested using POSTMAN. Once routes were deemed to route to the correct files/places, creation of user schemas, exercise program schemas, exercises, and comments was done. Relationships of the schemas can be viewed using the ERD diagram above. Once schemas were created, I then focused on user authentication and authorization. For this, I implemented a sessions-based authentication, creating a stateful API. The landing page was made after this in order to establish the base style of the application. After finishing that, I then focused on ensuring CRUD functionality for users and exercise programs in order to finish the base application. Once the base application was made, additional features such as printing PDFs, filtering + sorting data, and comment + rating integration was done. EJS templates and CSS stylings were created at the appropriate stages of the development of the application.  
+
+## Features
+- Carousel components, dropdown menu components, form components
+- Sessions-based authentication and authorization
+- Use of Google Maps Embed API in order to display the location of users in the application
+- Routing with the aid of expressJS
+- MongoDB as the database of choice and mongoose for database interactions
+- Use of mongoose's aggregation pipeline to calculate average rating for an individual exercise program
+- Use of puppeteer in order to create a PDF from user's exercise programs
+- Use of mongoose's Query functions in order to implement filtering and sorting of exercise program data
+- EJS for server-side view templating
+- Use of bcrypt for hashing passwords
+- Ability to create, edit, delete, and view users and exercise programs throughout the application
+- Ability to add comments to other users' exercise programs to provide feedback for the programs
+- Ability to login and logout of the application
 
 ## Contributing:
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
@@ -64,3 +97,6 @@ GitHub: https://github.com/psantos2107
 Other Projects: 
 - Pokemon Trivia Game: https://github.com/psantos2107/pokemon-trivia-game
 
+## Acknowledgments:
+- ChatGPT 4.0 for assistance with debugging and learning how to implement different features in the application
+- Bootstrap CSS (https://getbootstrap.com/): for the carousel component, dropdown menu component, and form components
