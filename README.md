@@ -71,8 +71,8 @@ For my project, my initial goal was to establish the file architecture and ensur
 - Ability to add comments to other users' exercise programs to provide feedback for the programs
 - Ability to login and logout of the application
 
-## Unresolved Stretch Goals (IceBox):
-- Did not implement pagination (will do at a later time)
+## Unresolved Stretch Goals (IceBox/Next Steps to be Performed later):
+- Did not implement pagination
 - App was not yet designed for responsiveness to a mobile device, nor was responsiveness to different browser sizes was emphasized
 - Did not implement slugs for URL routes to make page navigation via URL input friendly for users
 - Implement auto-complete for users when they try to fill out the forms for the exercise programs that they make
