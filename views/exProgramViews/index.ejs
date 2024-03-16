@@ -68,7 +68,11 @@
       <section class="exercise-container">
         <%exercisePrograms.forEach(program => { %> <%-
         include('./../partials/exerciseCard.ejs', {program, createdByIncluded:
-        true}) %> <% })%>
+        true}) %> <% })%> <%if(exercisePrograms.length === 0){ %>
+        <h2 class="not-found">
+          No exercise programs found that match your search. Please try again
+        </h2>
+        <%}%>
       </section>
     </main>
     <%- include('./../partials/footer.ejs') %>
