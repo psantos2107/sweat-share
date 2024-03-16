@@ -71,6 +71,14 @@ For my project, my initial goal was to establish the file architecture and ensur
 - Ability to add comments to other users' exercise programs to provide feedback for the programs
 - Ability to login and logout of the application
 
+## Unresolved Stretch Goals (IceBox):
+- Did not implement pagination (will do at a later time)
+- App was not yet designed for responsiveness to a mobile device, nor was responsiveness to different browser sizes was implemented
+- Did not implement slugs for URL routes to make page navigation via URL input friendly for users
+- Implement auto-complete for users when they try to fill out the forms for the exercise programs that they make
+- Did not add an alias route for users to view the "top 5 most popular workout programs" (based on reviews and num comments)
+- Did not add a search route for exercise programs based on ratings 
+
 ## Contributing:
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
 
