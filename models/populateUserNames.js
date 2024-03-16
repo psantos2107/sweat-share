@@ -4,7 +4,7 @@ const Comment = require("./comment");
 const populateUserNames = async function (array, modelType) {
   let objArray = [...array];
 
-  //populate createdBy so that we can access the username (exercisePrograms at this point will be an array of promises that need to all be ran still)
+  //populate createdBy so that we can access the username (exercisePrograms at this point will be an array of promises that need to all be ran still). the control statement determines whether commments or exercise programs should be populated
   if (modelType === "exercise") {
     objArray = objArray.map(async (obj) => {
       return await ExerciseProgram.populate(obj, {
@@ -30,5 +30,3 @@ const populateUserNames = async function (array, modelType) {
 };
 
 module.exports = populateUserNames;
-
-/**/

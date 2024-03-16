@@ -1375,5 +1375,3 @@ seedUserData()
     console.log("Could not seed database:\n" + err);
     process.exit();
   });
-
-  /**/

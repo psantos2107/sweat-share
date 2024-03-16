@@ -66,6 +66,7 @@ const allExPrograms = async (req, res) => {
 };
 
 const newExProgram = (req, res) => {
+  //if there was a validation error, it will produce the new ex program page WITH the error message for the client. if the user just arrived from the page elsewhere, the error message will not show
   const [errorMessage] = req.flash("newExProgramError");
   res.render("exProgramViews/new.ejs", {
     id: req.session.currentUser._id,
@@ -86,7 +87,10 @@ const deleteExProgram = async (req, res) => {
 
 const updateExProgram = async (req, res) => {
   try {
+    //add the createdBy field to the body
     req.body.createdBy = req.session.currentUser._id;
+
+    //parse the sets field from string to a number type, and verify if the imagePath is a valid URL, then update
     req.body.exercises.forEach((exercise) => {
       exercise.sets = parseInt(exercise.sets);
       exercise.imagePath = isValidURL(exercise.imagePath);
@@ -108,7 +112,10 @@ const updateExProgram = async (req, res) => {
 
 const createExProgram = async (req, res) => {
   try {
+    //add the createdBy field to the request body
     req.body.createdBy = req.session.currentUser._id;
+
+    //parse the sets field from string to a number type, and verify if the imagePath is a valid URL, then create the document to the db
     req.body.exercises.forEach((exercise) => {
       exercise.sets = parseInt(exercise.sets);
       exercise.imagePath = isValidURL(exercise.imagePath);
@@ -116,6 +123,7 @@ const createExProgram = async (req, res) => {
     await ExerciseProgram.create(req.body);
     res.redirect("/exercisePrograms");
   } catch (error) {
+    //req.flash allows for a message to be stored in sessions to be then used in another route
     let errMessage = setErrorMessage(error);
     req.flash("newExProgramError", errMessage);
     res.redirect("/exercisePrograms/new");
@@ -125,10 +133,16 @@ const createExProgram = async (req, res) => {
 const editExProgram = async (req, res) => {
   try {
     let program = await ExerciseProgram.findById(req.params.id);
+
+    //ensures that a user cannot just write the edit route in the URL and then all of a sudden edit someone else's exercise program
     if (!(req.session.currentUser._id === program.createdBy.toString())) {
       throw new Error();
     }
+
+    //populate the program's createdBy field with a username
     [program] = await populateUserNames([program], "exercise");
+
+    //if there's an error message present, then store and render the error message in the UI of the edit page
     const errorMessage = req.flash("editExProgError");
     res.render("exProgramViews/edit.ejs", {
       errorMessage,
@@ -146,15 +160,22 @@ const editExProgram = async (req, res) => {
 
 const showExProgram = async (req, res) => {
   try {
+    //find the program in the parameters section, then find all associated comments.
     let program = await ExerciseProgram.findById(req.params.id);
-    [program] = await populateUserNames([program], "exercise");
+    [program] = await populateUserNames([program], "exercise"); //populates createdBy and includes the username field
     let comments = await Comment.find({ exerciseProgram: program._id });
+
+    //if there are no comments, just set the comments variable as "null", otherwise, populate usernames for all the createdBy fields for the comments objects
     if (comments.length > 0) {
       comments = await populateUserNames(comments, "comment");
     } else {
       comments = null;
     }
+
+    //get the program rating based on all the comments
     let [programRating] = await getProgramRating(program._id);
+
+    //show the edit and delete buttons based on whether the user is viewing their own program
     let userViewingOwnProgram =
       program.createdBy._id.toString() === req.session.currentUser._id
         ? true

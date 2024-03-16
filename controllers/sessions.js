@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const User = require("./../models/user");
 
 const newSession = (req, res) => {
+  //if there is a login error, it will post the login error
   const errorMessage = req.flash("loginError");
   res.render("sessionViews/new.ejs", { errorMessage });
 };
@@ -11,7 +12,7 @@ const createSession = async (req, res) => {
   try {
     const foundUser = await User.findOne({ username: req.body.username });
     if (!foundUser) {
-      // if found user is undefined/null not found etc
+      // if found user is undefined/null not found etc. stores the error message in req.flash
       req.flash("loginError", "Username or password is incorrect");
       res.redirect("/sessions/new");
     } else if (await bcrypt.compare(req.body.password, foundUser.password)) {
@@ -30,6 +31,7 @@ const createSession = async (req, res) => {
 };
 
 const destroySession = (req, res) => {
+  //log out
   req.session.destroy(() => {
     console.log("session ended");
     res.redirect("/");
@@ -41,5 +43,3 @@ module.exports = {
   createSession,
   destroySession,
 };
-
-/**/

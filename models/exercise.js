@@ -31,4 +31,3 @@ const exerciseSchema = new Schema(
 );
 
 module.exports = exerciseSchema;
-/**/
