@@ -1,5 +1,5 @@
 # sweat-share
-Sweat share is an application where fitness professionals, enthusiasts, and lovers can find new exercise programs from other users to implement into their own workout routine. As a user of the application, you will be able to search for programs you want to try out, create exercise programs to share with other users, and commment and rate on programs that you like to give feedback for others. The goal of sweat-share is to create a community of fitness lovers that strive to make each other better by sharing their knowledge, and their love for fitness and exercise!
+Sweat share is an application where fitness professionals, enthusiasts, and lovers can find new exercise programs from other users to implement into their own workout routine. As a user of the application, you will be able to search for programs you want to try out, create exercise programs to share with other users, and comment and rate on programs that you like to give feedback for others. The goal of sweat-share is to create a community of fitness lovers that strive to make each other better by sharing their knowledge, and their love for fitness and exercise!
 
 ## Screenshots
 <img width="1678" alt="Screenshot 2024-03-15 at 6 40 31 PM" src="https://github.com/psantos2107/sweat-share/assets/146752384/eb0b36b6-7f60-4440-9721-cc1588d43923">
@@ -10,6 +10,9 @@ Sweat share is an application where fitness professionals, enthusiasts, and love
 
 ## Entity Relationship Diagram
 <img width="705" alt="Screenshot 2024-03-02 at 10 36 59 AM" src="https://github.com/psantos2107/sweat-share/assets/146752384/b65b0da0-495a-4737-80c8-3d2e19bab391">
+
+## Link to Live Site:
+https://sweatshare-6d68a7df5043.herokuapp.com/
 
 ## Technologies Used:
 - HTML5
@@ -33,7 +36,21 @@ NPM Modules:
 - validator (for error validation)
 
 ## Approach Taken
+For my project, my initial goal was to establish the file architecture and ensure that all routes were created and routed to the correct places. I implemented an MVC (models-views-controllers) file architecture with a particular focus on practicing the principle of "separation of concerns". A separate routers and utils folder was also created to ensure further modularity of the codebase. After file architecture was established, routers were created using Express.js and routes were tested using POSTMAN. Once routes were deemed to route to the correct files/places, creation of user schemas, exercise program schemas, exercises, and comments was done. Relationships of the schemas can be viewed using the ERD diagram above. Once schemas were created, I then focused on user authentication and authorization. For this, I implemented a sessions-based authentication, creating a stateful API. The landing page was made after this in order to establish the base style of the application. After finishing that, I then focused on ensuring CRUD functionality for users and exercise programs in order to finish the base application. Once the base application was made, additional features such as printing PDFs, filtering + sorting data, and comment + rating integration was done. EJS templates and CSS stylings were created at the appropriate stages of the development of the application.  
 
+## Contributing:
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (git checkout -b feature/AmazingFeature)
+3. Commit your Changes (git commit -m 'Add some AmazingFeature')
+4. Push to the Branch (git push origin feature/AmazingFeature)
+5. Open a Pull Request
+
+## License
+Distributed under the MIT license. See License.txt for more information.
 
 ## Contact
 Name: Paul Santos
