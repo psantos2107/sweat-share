@@ -200,6 +200,8 @@ const exerciseProgramData1 = [
         sets: 3,
         repetitions: 12,
         restTime: "60 seconds",
+        imagePath:
+          "https://cdn.shopify.com/s/files/1/2350/9323/files/Barbell_Hip_Thrust_480x480.jpg?v=1676877503",
         equipmentNeeded: "Barbell, Bench",
         muscleWorked: "Glutes",
       },
@@ -209,6 +211,8 @@ const exerciseProgramData1 = [
         sets: 4,
         repetitions: 10,
         restTime: "45 seconds",
+        imagePath:
+          "https://hips.hearstapps.com/hmg-prod/images/romanian-deadlift-1595930760.jpg",
         equipmentNeeded: "Barbell, Weight Plates",
         muscleWorked: "Hamstrings, Glutes",
       },
@@ -218,6 +222,8 @@ const exerciseProgramData1 = [
         sets: 3,
         repetitions: "10 each leg",
         restTime: "30 seconds",
+        imagePath:
+          "https://www.spotebi.com/wp-content/uploads/2016/12/walking-lunges-exercise-illustration-spotebi.jpg",
         equipmentNeeded: "None",
         muscleWorked: "Quadriceps, Glutes",
       },
@@ -226,6 +232,8 @@ const exerciseProgramData1 = [
         description: "Activates and strengthens the glutes.",
         sets: 3,
         repetitions: 15,
+        imagePath:
+          "https://static.spacecrafted.com/f647b6d7284b479f86ed68094f858ff8/i/f80b466778d14846aeb4af9863055902/1/4SoifmQp45JMgBnHp7ed2/Glute-Bridge-STACK.jpg",
         restTime: "45 seconds",
         equipmentNeeded: "None",
         muscleWorked: "Glutes",
@@ -1300,6 +1308,8 @@ const exerciseProgramData2 = [
     exercises: [
       {
         name: "Mountain Climbers",
+        imagePath:
+          "https://media1.popsugar-assets.com/files/thumbor/NldlMM9Ci6MPNt0_6ZOvEaKxhuo=/fit-in/1584x1088/top/filters:format_auto():upscale()/2022/12/09/752/n/1922729/tmp_9yEJUq_c0df08feaf677836_PS21_Fitness_Workout_09_Move_01_Mountain_Climber.jpg",
         description:
           "Assume a push-up position and alternate bringing knees towards chest.",
         sets: 4,
@@ -1314,6 +1324,8 @@ const exerciseProgramData2 = [
           "From plank position, jump feet out and in like a jumping jack.",
         sets: 4,
         repetitions: 15,
+        imagePath:
+          "https://hips.hearstapps.com/hmg-prod/images/full-body-burn-20-minutes-no-equipment-composites-plank-jack-knee-tuck-1462383894.jpg?resize=1200:*",
         restTime: "30 seconds",
         equipmentNeeded: "None",
         muscleWorked: "Core, Cardiovascular System",
@@ -1324,6 +1336,8 @@ const exerciseProgramData2 = [
           "Run at maximum effort for 30 seconds, followed by 30 seconds of walking or jogging.",
         sets: 4,
         repetitions: "30 seconds",
+        imagePath:
+          "https://simplifaster.com/wp-content/uploads/2020/03/5-Point-Guide.jpg",
         restTime: "30 seconds",
         equipmentNeeded: "Running Shoes",
         muscleWorked: "Legs, Cardiovascular System",
